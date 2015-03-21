@@ -16,7 +16,7 @@ Accounts::Accounts(QObject *parent)
 {
     m_model->setGrouping(ItemGrouping::ByFirstChar);
     m_model->setSortedAscending(true);
-    m_model->setSortingKeys(QStringList()<<"displayName"<<"accountId");
+    m_model->setSortingKeys(QStringList()<<"isExternal"<<"displayName"<<"accountId");
 
     bool ok = connect(m_accountService, SIGNAL(accountsChanged(bb::pim::account::AccountsChanged)), SLOT(loadAccounts()));
     Q_ASSERT(ok);
@@ -42,12 +42,18 @@ void Accounts::viewAccount()
 
 void Accounts::deleteAccount()
 {
-    m_accountService->deleteAccount(m_currentAccountId);
+    Result response = m_accountService->deleteAccount(m_currentAccountId);
+    if (!response.isSuccess()) {
+        emit this->error(response.errorCode(), response.message());
+    }
 }
 
 void Accounts::updateAccount()
 {
-    m_accountService->updateAccount(m_currentAccountId, m_accountService->account(m_currentAccountId));
+    Result response = m_accountService->updateAccount(m_currentAccountId, m_accountService->account(m_currentAccountId));
+    if (!response.isSuccess()) {
+        emit this->error(response.errorCode(), response.message());
+    }
 }
 
 bb::cascades::GroupDataModel* Accounts::model() const
@@ -67,12 +73,11 @@ void Accounts::loadAccounts()
     const QList<Account> accounts = m_accountService->allAccounts();
 
     foreach (const Account &account, accounts) {
-        if (account.isExternalData()) {
-            QVariantMap entry;
-            entry["accountId"] = account.id();
-            entry["displayName"] = account.displayName();
+        QVariantMap entry;
+        entry["accountId"] = account.id();
+        entry["displayName"] = account.displayName();
+        entry["isExternal"] = account.isExternalData();
 
-            m_model->insert(entry);
-        }
+        m_model->insert(entry);
     }
 }

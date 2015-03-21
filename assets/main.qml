@@ -4,8 +4,14 @@ import bb.system 1.2
 NavigationPane {
     id: navigationPane
     
+    function showError(code, message) {
+        errorToast.body = code + " " + message
+        errorToast.show()
+    }
+    
     onCreationCompleted: {
         startDialog.show()
+        _accounts.error.connect(navigationPane.showError)
     }
     
     onPopTransitionEnded: {
@@ -18,8 +24,17 @@ NavigationPane {
             title: qsTr("Accounts")
         }
         Container {
+            layout: DockLayout {
+            }
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
+            Label {
+                text: qsTr("No accounts found")
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                visible: accountsList.dataModel.size() == 0
+                textStyle.base: SystemDefaults.TextStyles.BigText
+            }
             ListView {
                 id: accountsList
                 
@@ -28,10 +43,12 @@ NavigationPane {
                     accountsList.select(indexPath)
                     _accounts.setCurrentAccount(indexPath)
                 }
-                function viewAcc(indexPath) {
+                function viewAcc(indexPath, isExternal) {
                     accountsList.handleSelect(indexPath)
                     _accounts.viewAccount();
-                    navigationPane.push(accountViewer.createObject())
+                    var accountViewerObject = accountViewer.createObject()
+                    accountViewerObject.isExternal = isExternal
+                    navigationPane.push(accountViewerObject)
                 }
                 function updateAcc(indexPath) {
                     accountsList.handleSelect(indexPath)
@@ -43,44 +60,57 @@ NavigationPane {
                     confirmDialog.deleteAcc = true
                     confirmDialog.show()
                 }
-                
-                listItemComponents: ListItemComponent {
-                    type: "item"
-                    StandardListItem {
-                        id: accountsListItem
-                        title: ListItemData.displayName
-                        description: ListItemData.accountId
-                        contextActions: [
-                            ActionSet {
-                                title: ListItemData.displayName
-                                subtitle: ListItemData.accountId
-                                ActionItem {
-                                    title: qsTr("View")
-                                    imageSource: "asset:///icons/view.png"
-                                    ActionBar.placement: ActionBarPlacement.InOverflow
-                                    onTriggered: {
-                                        accountsListItem.ListItem.view.viewAcc(accountsListItem.ListItem.indexPath)
+
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                listItemComponents: [
+                    ListItemComponent {
+                        type: "header"
+                        Header {
+                            title: ListItemData ? "External" : "Internal"
+                        }
+                    },
+                    ListItemComponent {
+                        type: "item"
+                        StandardListItem {
+                            id: accountsListItem
+                            title: ListItemData.displayName
+                            description: ListItemData.accountId
+                            contextActions: [
+                                ActionSet {
+                                    title: ListItemData.displayName
+                                    subtitle: ListItemData.accountId
+                                    ActionItem {
+                                        title: qsTr("View")
+                                        imageSource: "asset:///icons/view.png"
+                                        ActionBar.placement: ActionBarPlacement.InOverflow
+                                        enabled: true
+                                        onTriggered: {
+                                            accountsListItem.ListItem.view.viewAcc(accountsListItem.ListItem.indexPath, ListItemData.isExternal)
+                                        }
+                                    }
+                                    ActionItem {
+                                        title: qsTr("Update")
+                                        imageSource: "asset:///icons/update.png"
+                                        ActionBar.placement: ActionBarPlacement.InOverflow
+                                        enabled: ListItemData.isExternal
+                                        onTriggered: {
+                                            accountsListItem.ListItem.view.updateAcc(accountsListItem.ListItem.indexPath)
+                                        }
+                                    }
+                                    DeleteActionItem {
+                                        enabled: ListItemData.isExternal
+                                        onTriggered: {
+                                            accountsListItem.ListItem.view.deleteAcc(accountsListItem.ListItem.indexPath)
+                                        }
                                     }
                                 }
-                                ActionItem {
-                                    title: qsTr("Update")
-                                    imageSource: "asset:///icons/update.png"
-                                    ActionBar.placement: ActionBarPlacement.InOverflow
-                                    onTriggered: {
-                                        accountsListItem.ListItem.view.updateAcc(accountsListItem.ListItem.indexPath)
-                                    }
-                                }
-                                DeleteActionItem {
-                                    onTriggered: {
-                                        accountsListItem.ListItem.view.deleteAcc(accountsListItem.ListItem.indexPath)
-                                    }
-                                }
-                            }
-                        ]
+                            ]
+                        }
                     }
-                }
+                ]
                 onTriggered: {
-                    accountsList.viewAcc(indexPath)
+                    accountsList.viewAcc(indexPath, accountsList.dataModel.data(indexPath)["isExternal"])
                 }
             }
         }
@@ -139,6 +169,10 @@ NavigationPane {
                 }
                 confirmDialog.deleteAcc = false
             }
+        },
+        SystemToast {
+            id: errorToast
+            autoUpdateEnabled: true
         }
     ]
 }

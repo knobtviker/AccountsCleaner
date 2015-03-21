@@ -68,9 +68,7 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
-    <description>Use this application at your own risk.&#xD;
-None of the authors, contributors, administrators, vandals, or anyone else connected with this application, in any way whatsoever, can be held responsible for your use of the application.&#xD;
-You can view, update and delete accounts from external provider.</description>
+    <description>Use this application at your own risk. You can view all accounts but update and delete accounts only from external provider.</description>
     <authorId>gYAAgBHha-ad23X3MZ5OiS76teI</authorId>
     <author>Knobtviker Inc.</author>
 
@@ -97,7 +95,7 @@ You can view, update and delete accounts from external provider.</description>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
-    <permission>_sys_manage_pimdomain_external_accounts</permission>
+    <!-- <permission>_sys_manage_pimdomain_external_accounts</permission> -->
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="dark?primaryColor=0xDCD427&amp;primaryBase=0xB7B327"/>
 

@@ -2,6 +2,10 @@ import bb.cascades 1.4
 import bb.system 1.2
 
 Page {
+    id: rootAccountView
+    
+    property bool isExternal: false
+    
     titleBar: TitleBar {
         title: qsTr ("Account Details")
     }
@@ -28,6 +32,7 @@ Page {
             title: qsTr("Update")
             imageSource: "asset:///icons/update.png"
             ActionBar.placement: ActionBarPlacement.OnBar
+            enabled: rootAccountView.isExternal
             onTriggered: {
                 confirmDialog.deleteAcc = false
                 confirmDialog.show()
@@ -37,6 +42,7 @@ Page {
             title: qsTr("Delete")
             ActionBar.placement: ActionBarPlacement.Signature
             imageSource: "asset:///icons/delete.png"
+            enabled: rootAccountView.isExternal
             onTriggered: {
                 confirmDialog.deleteAcc = true
                 confirmDialog.show()

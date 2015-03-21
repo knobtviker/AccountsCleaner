@@ -32,5 +32,8 @@ private:
     bb::cascades::GroupDataModel* m_model;
     AccountViewer* m_accountViewer;
     bb::pim::account::AccountKey m_currentAccountId;
+
+Q_SIGNALS:
+    void error(int code, const QString &message);
 };
 #endif
