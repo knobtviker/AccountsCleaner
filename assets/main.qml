@@ -9,9 +9,19 @@ NavigationPane {
         errorToast.show()
     }
     
+    function showInfo(deleteAcc) {
+        if (deleteAcc) {
+            infoToast.body = "Account deleted"
+        } else {
+            infoToast.body = "Account updated"
+        }
+        infoToast.show()
+    }
+
     onCreationCompleted: {
         startDialog.show()
         _accounts.error.connect(navigationPane.showError)
+        _accounts.success.connect(navigationPane.showInfo)
     }
     
     onPopTransitionEnded: {
@@ -172,6 +182,10 @@ NavigationPane {
         },
         SystemToast {
             id: errorToast
+            autoUpdateEnabled: true
+        },
+        SystemToast {
+            id: infoToast
             autoUpdateEnabled: true
         }
     ]

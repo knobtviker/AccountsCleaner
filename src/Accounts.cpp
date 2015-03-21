@@ -45,6 +45,8 @@ void Accounts::deleteAccount()
     Result response = m_accountService->deleteAccount(m_currentAccountId);
     if (!response.isSuccess()) {
         emit this->error(response.errorCode(), response.message());
+    } else {
+        emit this->success(true);
     }
 }
 
@@ -53,6 +55,8 @@ void Accounts::updateAccount()
     Result response = m_accountService->updateAccount(m_currentAccountId, m_accountService->account(m_currentAccountId));
     if (!response.isSuccess()) {
         emit this->error(response.errorCode(), response.message());
+    } else {
+        emit this->success(false);
     }
 }
 

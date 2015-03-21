@@ -35,5 +35,6 @@ private:
 
 Q_SIGNALS:
     void error(int code, const QString &message);
+    void success(bool delAcc);
 };
 #endif

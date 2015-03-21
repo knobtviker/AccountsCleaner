@@ -27,17 +27,20 @@ ApplicationUI::ApplicationUI() :
     onSystemLanguageChanged();
 
     qmlRegisterType<AccountViewer>();
+
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
-    QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
-
-    // Create root object for the UI
-    AbstractPane *root = qml->createRootObject<AbstractPane>();
+    QmlDocument *qml = QmlDocument::create("asset:///main.qml", false).parent(this);
     qml->setContextProperty("_accounts", new Accounts(this));
 
-    // Set created root object as the application scene
-    Application::instance()->setMenuEnabled(false);
-    Application::instance()->setScene(root);
+    // Create root object for the UI
+    if (qml->load()) {
+        AbstractPane *root = qml->createRootObject<AbstractPane>();
+
+        // Set created root object as the application scene
+        Application::instance()->setMenuEnabled(false);
+        Application::instance()->setScene(root);
+    }
 }
 
 void ApplicationUI::onSystemLanguageChanged()
