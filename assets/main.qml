@@ -33,6 +33,8 @@ NavigationPane {
         titleBar: TitleBar {
             title: qsTr("Accounts")
         }
+        actionBarVisibility: ChromeVisibility.Overlay
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         Container {
             layout: DockLayout {
             }
@@ -71,6 +73,7 @@ NavigationPane {
                     confirmDialog.show()
                 }
 
+                scrollRole: ScrollRole.Main
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 listItemComponents: [
@@ -187,6 +190,11 @@ NavigationPane {
         SystemToast {
             id: infoToast
             autoUpdateEnabled: true
+        },
+        PageLayoutUpdateHandler {
+            onBottomOverlayHeightChanged: {
+                accountsList.bottomPadding = bottomOverlayHeight
+            }
         }
     ]
 }

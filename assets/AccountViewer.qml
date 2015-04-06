@@ -9,11 +9,14 @@ Page {
     titleBar: TitleBar {
         title: qsTr ("Account Details")
     }
-
+    actionBarVisibility: ChromeVisibility.Overlay
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     Container {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         ListView {
+            id: accountDetailsListView
+            scrollRole: ScrollRole.Main
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
             dataModel: _accounts.accountViewer.fields
@@ -73,6 +76,11 @@ Page {
                     confirmDialog.cancel()
                 }
                 confirmDialog.deleteAcc = false
+            }
+        },
+        PageLayoutUpdateHandler {
+            onBottomOverlayHeightChanged: {
+                accountDetailsListView.bottomPadding = bottomOverlayHeight
             }
         }
     ]

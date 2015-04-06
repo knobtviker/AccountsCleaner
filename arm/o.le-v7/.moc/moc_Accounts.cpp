@@ -22,34 +22,35 @@ static const uint qt_meta_data_Accounts[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
-       2,   44, // properties
+       7,   14, // methods
+       2,   49, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       23,   10,    9,    9, 0x05,
+      49,   42,    9,    9, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      42,    9,    9,    9, 0x0a,
-      67,   57,    9,    9, 0x0a,
-      99,    9,    9,    9, 0x0a,
-     113,    9,    9,    9, 0x0a,
-     129,    9,    9,    9, 0x0a,
+      63,    9,    9,    9, 0x0a,
+      88,   78,    9,    9, 0x0a,
+     120,    9,    9,    9, 0x0a,
+     134,    9,    9,    9, 0x0a,
+     150,    9,    9,    9, 0x0a,
 
  // properties: name, type, flags
-     175,  145, 0x00095409,
-     196,  181, 0x00095409,
+     196,  166, 0x00095409,
+     217,  202, 0x00095409,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Accounts[] = {
     "Accounts\0\0code,message\0error(int,QString)\0"
-    "loadAccounts()\0indexPath\0"
-    "setCurrentAccount(QVariantList)\0"
+    "delAcc\0success(bool)\0loadAccounts()\0"
+    "indexPath\0setCurrentAccount(QVariantList)\0"
     "viewAccount()\0deleteAccount()\0"
     "updateAccount()\0bb::cascades::GroupDataModel*\0"
     "model\0AccountViewer*\0accountViewer\0"
@@ -62,11 +63,12 @@ void Accounts::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Accounts *_t = static_cast<Accounts *>(_o);
         switch (_id) {
         case 0: _t->error((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 1: _t->loadAccounts(); break;
-        case 2: _t->setCurrentAccount((*reinterpret_cast< const QVariantList(*)>(_a[1]))); break;
-        case 3: _t->viewAccount(); break;
-        case 4: _t->deleteAccount(); break;
-        case 5: _t->updateAccount(); break;
+        case 1: _t->success((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 2: _t->loadAccounts(); break;
+        case 3: _t->setCurrentAccount((*reinterpret_cast< const QVariantList(*)>(_a[1]))); break;
+        case 4: _t->viewAccount(); break;
+        case 5: _t->deleteAccount(); break;
+        case 6: _t->updateAccount(); break;
         default: ;
         }
     }
@@ -104,9 +106,9 @@ int Accounts::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {
@@ -140,5 +142,12 @@ void Accounts::error(int _t1, const QString & _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void Accounts::success(bool _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE
