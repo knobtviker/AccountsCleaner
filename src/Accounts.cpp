@@ -74,7 +74,9 @@ void Accounts::loadAccounts()
 {
     m_model->clear();
 
-    const QList<Account> accounts = m_accountService->allAccounts();
+    //TODO: Once everyone has 10.3 uncomment this
+    //const QList<Account> accounts = m_accountService->allAccounts();
+    const QList<Account> accounts = m_accountService->accounts();
 
     foreach (const Account &account, accounts) {
         QVariantMap entry;

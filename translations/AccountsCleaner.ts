@@ -19,18 +19,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AccountViewer.qml" line="61"/>
+        <location filename="../assets/AccountViewer.qml" line="63"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AccountViewer.qml" line="62"/>
+        <location filename="../assets/AccountViewer.qml" line="64"/>
         <source>There is no undo or going back if bad things happen on your device.
 Are you sure you want to delete this account from your device?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AccountViewer.qml" line="62"/>
+        <location filename="../assets/AccountViewer.qml" line="64"/>
         <source>Update account removes require password flag from this account and stops random notifications.
  Are you sure you want to update this account on your device?</source>
         <translation type="unfinished"></translation>
@@ -77,34 +77,34 @@ Are you sure you want to delete this account from your device?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="148"/>
+        <location filename="../assets/main.qml" line="150"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="149"/>
+        <location filename="../assets/main.qml" line="151"/>
         <source>Use this application at your own risk.
 None of the authors, contributors, administrators, vandals, or anyone else connected with this application, in any way whatsoever, can be held responsible for your use of the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="153"/>
+        <location filename="../assets/main.qml" line="155"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="167"/>
+        <location filename="../assets/main.qml" line="169"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="168"/>
+        <location filename="../assets/main.qml" line="170"/>
         <source>There is no undo or going back if bad things happen on your device.
 Are you sure you want to delete this account from your device?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="168"/>
+        <location filename="../assets/main.qml" line="170"/>
         <source>Update account removes require password flag from this account and stops random notifications.
  Are you sure you want to update this account on your device?</source>
         <translation type="unfinished"></translation>

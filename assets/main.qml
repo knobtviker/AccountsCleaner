@@ -1,4 +1,4 @@
-import bb.cascades 1.4
+import bb.cascades 1.2
 import bb.system 1.2
 
 NavigationPane {
@@ -131,7 +131,9 @@ NavigationPane {
             ActionItem {
                 title: qsTr("Refresh")
                 imageSource: "asset:///icons/refresh.png"
-                ActionBar.placement: ActionBarPlacement.Signature
+                //TODO: Once everyone has 10.3 uncomment this
+                //ActionBar.placement: ActionBarPlacement.Signature
+                ActionBar.placement: ActionBarPlacement.OnBar
                 onTriggered: {
                     _accounts.loadAccounts()
                 }
@@ -190,11 +192,14 @@ NavigationPane {
         SystemToast {
             id: infoToast
             autoUpdateEnabled: true
-        },
+        }
+        //TODO: Once everyone has 10.3 uncomment this
+        /*
         PageLayoutUpdateHandler {
             onBottomOverlayHeightChanged: {
                 accountsList.bottomPadding = bottomOverlayHeight
             }
         }
+        */
     ]
 }

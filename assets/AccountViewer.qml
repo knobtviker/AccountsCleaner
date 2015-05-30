@@ -1,4 +1,4 @@
-import bb.cascades 1.4
+import bb.cascades 1.2
 import bb.system 1.2
 
 Page {
@@ -43,7 +43,9 @@ Page {
         },
         ActionItem {
             title: qsTr("Delete")
-            ActionBar.placement: ActionBarPlacement.Signature
+            //TODO: Once everyone has 10.3 uncomment this
+            //ActionBar.placement: ActionBarPlacement.Signature
+            ActionBar.placement: ActionBarPlacement.OnBar
             imageSource: "asset:///icons/delete.png"
             enabled: rootAccountView.isExternal
             onTriggered: {
@@ -77,11 +79,14 @@ Page {
                 }
                 confirmDialog.deleteAcc = false
             }
-        },
+        }
+        //TODO: Once everyone has 10.3 uncomment this
+        /*
         PageLayoutUpdateHandler {
             onBottomOverlayHeightChanged: {
                 accountDetailsListView.bottomPadding = bottomOverlayHeight
             }
         }
+        */
     ]
 }
